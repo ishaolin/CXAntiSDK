@@ -48,11 +48,11 @@
 + (NSDictionary<NSString *, id> *)dataTrackingAntiFraudParams{
     NSMutableDictionary<NSString *, id> *params = [NSMutableDictionary dictionary];
     [params addEntriesFromDictionary:[self antiFraudParams]];
-    NSDictionary<NSString *, NSString *> *WiFiInfo = [UIDevice currentDevice].cx_WiFiInfo;
-    [params cx_setObject:WiFiInfo[CX_WiFi_SSID] forKey:@"ssid"];
-    [params cx_setObject:WiFiInfo[CX_WiFi_BSSID] forKey:@"bssid"];
+    NSDictionary<NSString *, NSString *> *WiFiInfo = [CXNetworkManager sharedManager].WiFiInfo;
+    [params cx_setObject:WiFiInfo[CX_WIFI_SSID] forKey:@"ssid"];
+    [params cx_setObject:WiFiInfo[CX_WIFI_BSSID] forKey:@"bssid"];
     [params cx_setObject:[UIDevice currentDevice].identifierForVendor.UUIDString forKey:@"idfv"];
-    [params cx_setObject:[UIDevice currentDevice].cx_IPAddr ?: [UIDevice currentDevice].cx_gatewayAddr forKey:@"cellular_ip"];
+    [params cx_setObject:[CXNetworkManager sharedManager].ipAddr ?: [CXNetworkManager sharedManager].gatewayAddr forKey:@"cellular_ip"];
     [params cx_setObject:@([UIDevice currentDevice].batteryState) forKey:@"battery_state"];
     [params cx_setObject:@([UIDevice currentDevice].batteryLevel).stringValue forKey:@"battery_level"];
     [params cx_setObject:@([UIScreen mainScreen].brightness).stringValue forKey:@"brightness"];
