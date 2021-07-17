@@ -12,12 +12,16 @@
 @implementation CXRSAUtils
 
 + (NSString *)encrypt:(NSString *)text{
+    return [self encrypt:text publicKey:CX_RSA_PUBLIC_KEY];
+}
+
++ (NSString *)encrypt:(NSString *)text publicKey:(NSString *)publicKey{
     if(!text){
         return nil;
     }
     
     NSData *data = [text dataUsingEncoding:NSUTF8StringEncoding];
-    data = [CXUCryptor encryptDataByRSA:data publicKey:CX_RSA_PUBLIC_KEY];
+    data = [CXUCryptor encryptDataByRSA:data publicKey:publicKey];
     if(!data){
         return nil;
     }

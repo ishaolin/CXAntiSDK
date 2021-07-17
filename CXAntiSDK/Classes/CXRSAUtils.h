@@ -11,4 +11,6 @@
 
 + (NSString *)encrypt:(NSString *)text;
 
++ (NSString *)encrypt:(NSString *)text publicKey:(NSString *)publicKey;
+
 @end
